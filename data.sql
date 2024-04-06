@@ -48,4 +48,4 @@ CREATE TABLE barriocovid.voluntarios (
     UNIQUE KEY idVoluntario_UNIQUE (idVoluntario),
     UNIQUE KEY Telefono_UNIQUE (Telefono),
     UNIQUE KEY Email_UNIQUE (Email),
-    CHECK (Email REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{
+    CHECK (Email REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]));
