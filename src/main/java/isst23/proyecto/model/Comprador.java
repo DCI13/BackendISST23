@@ -32,7 +32,7 @@ public class Comprador {
     public Comprador() {
     }
 
-    public Comprador(String nombre, String apellido, String telefono, String correo, String contraseña, String direccion, boolean voluntario) {
+    public Comprador(String nombre, String apellido, String telefono, String correo, String contraseña, String direccion, boolean vulnerable) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
