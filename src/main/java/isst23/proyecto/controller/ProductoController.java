@@ -30,20 +30,10 @@ public class ProductoController {
         return ResponseEntity.ok().body(productos);
     }
 
-@PostMapping
-public ResponseEntity<Producto> createProducto(@RequestParam("producto") String productoJson, @RequestParam("foto") MultipartFile foto) {
-    ObjectMapper objectMapper = new ObjectMapper();
-    Producto producto;
-    try {
-        producto = objectMapper.readValue(productoJson, Producto.class);
-        producto.setFoto(foto.getBytes());
-    } catch (IOException e) {
-        e.printStackTrace();
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    @PostMapping
+    public ResponseEntity<Producto> createProducto(@RequestBody Producto producto) {
+        Producto nuevoProducto = productoRepository.save(producto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoProducto);
     }
-
-    Producto nuevoProducto = productoRepository.save(producto);
-    return ResponseEntity.status(HttpStatus.CREATED).body(nuevoProducto);
-}
 
 }

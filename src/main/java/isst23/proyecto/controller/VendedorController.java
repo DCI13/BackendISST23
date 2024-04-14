@@ -1,5 +1,8 @@
 package isst23.proyecto.controller;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,18 +28,30 @@ public class VendedorController {
        return vendedorRepository.save(vendedor);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> iniciarSesion(@RequestBody Vendedor vendedor) {
-        // Buscar el comprador por correo electrónico y contraseña
-        Vendedor vendedorAutenticado = vendedorRepository.findByCorreoAndContraseña(vendedor.getcorreo(), vendedor.getcontraseña());
+@PostMapping("/login")
+    public ResponseEntity<Map<String, String>> iniciarSesion(@RequestBody Vendedor vendedor) {
+        Map<String, String> response = new HashMap<>();
+
+        // Buscar al vendedor por correo electrónico
+        Vendedor vendedorAutenticado = vendedorRepository.findByCorreo(vendedor.getcorreo());
         
-        // Verificar si se encontró un comprador válido
+        // Verificar si se encontró un vendedor con ese correo electrónico
         if (vendedorAutenticado != null) {
-            // Devolver una respuesta exitosa con un mensaje
-            return ResponseEntity.ok("Inicio de sesión exitoso");
+            // Verificar si la contraseña coincide
+            if (vendedorAutenticado.getcontraseña().equals(vendedor.getcontraseña())) {
+                // Si las credenciales son correctas, devolver un mensaje exitoso con el tipo de usuario y el ID
+                response.put("mensaje", "vendedor");
+                response.put("id", String.valueOf(vendedorAutenticado.getId()));
+                return ResponseEntity.ok(response);
+            } else {
+                // Si la contraseña no coincide, devolver un mensaje de error
+                response.put("error", "Credenciales incorrectas");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+            }
         } else {
-            // Devolver una respuesta de error con un mensaje
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+            // Si no se encontró ningún vendedor con ese correo electrónico, devolver un mensaje de error
+            response.put("error", "Credenciales incorrectas");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }
 }

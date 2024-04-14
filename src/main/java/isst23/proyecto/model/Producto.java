@@ -14,14 +14,14 @@ public class Producto {
     private Long id;
     private String nombre;
     private String descripcion;
-    private Float precio;
-    private Long stock;
-    private byte[] foto;
+    private Double precio;
+    private Integer stock;
+    private String foto;
 
     // Constructor
     public Producto() {}
 
-    public Producto(String nombre, String descripcion, Float precio, Long stock, byte[] foto) {
+    public Producto(String nombre, String descripcion, Double precio, Integer stock, String foto) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -41,15 +41,15 @@ public class Producto {
         return descripcion;
     }
 
-    public Float getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public Long getStock() {
+    public Integer getStock() {
         return stock;
     }
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
 
@@ -66,15 +66,15 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public void setPrecio(Float precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
-    public void setStock(Long stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 }
