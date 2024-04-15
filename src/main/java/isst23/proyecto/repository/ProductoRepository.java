@@ -10,4 +10,7 @@ import isst23.proyecto.Interface.ProductoProjection;
 import isst23.proyecto.model.Producto;
 
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
+
+    List<Producto> findByVendedorId(Long idVendedor);
+
 }

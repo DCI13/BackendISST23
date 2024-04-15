@@ -2,10 +2,11 @@ package isst23.proyecto.model;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -28,7 +29,10 @@ public class Vendedor {
     private String tienda;
     private String horario;
     private String imagen;
-    @JsonIgnore
+
+@JsonManagedReference
+@OneToMany(mappedBy = "vendedor")
+private List<Producto> productos;
 
     public Vendedor() {
     }
@@ -88,7 +92,7 @@ public class Vendedor {
         return this.contraseña;
     }
 
-    public void setcontraseña(String constraseña) {
+    public void setcontraseña(String contraseña) {
         this.contraseña = contraseña;
     }
 
@@ -122,6 +126,14 @@ public class Vendedor {
 
     public void setimagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 
 }
