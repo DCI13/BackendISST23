@@ -2,10 +2,15 @@ package isst23.proyecto.model;
 
 import java.sql.Blob;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Producto {
@@ -18,7 +23,11 @@ public class Producto {
     private Integer stock;
     private String foto;
 
-    // Constructor
+@JsonBackReference
+@ManyToOne
+@JoinColumn(name = "vendedorid", nullable = false)
+private Vendedor vendedor;
+    //Constructor
     public Producto() {}
 
     public Producto(String nombre, String descripcion, Double precio, Integer stock, String foto) {
@@ -53,6 +62,10 @@ public class Producto {
         return foto;
     }
 
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
     // Setters
     public void setId(Long id) {
         this.id = id;
@@ -76,5 +89,9 @@ public class Producto {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
     }
 }

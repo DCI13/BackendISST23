@@ -8,7 +8,9 @@ import java.util.Optional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 import isst23.proyecto.model.Producto;
+import isst23.proyecto.model.Vendedor;
 import isst23.proyecto.repository.ProductoRepository;
+import isst23.proyecto.repository.VendedorRepository;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,18 +21,38 @@ public class ProductoController {
 
     @Autowired
     private ProductoRepository productoRepository;
+    @Autowired   
+    private VendedorRepository vendedorRepository;
 
+    // @GetMapping
+    // public ResponseEntity<List<Producto>> getAllProductos() {
+    //     List<Producto> productos = productoRepository.findAll();
+    //     return ResponseEntity.ok().body(productos);
+    // }
     @GetMapping
-    public ResponseEntity<List<Producto>> getAllProductos() {
-        List<Producto> productos = productoRepository.findAll();
-        return ResponseEntity.ok().body(productos);
+public ResponseEntity<List<Producto>> getProductsByVendedorId(@RequestParam(required = false) Long idVendedor) {
+    List<Producto> productos;
+    if (idVendedor != null) {
+        productos = productoRepository.findByVendedorId(idVendedor);
+    } else {
+        productos = productoRepository.findAll();
     }
+    return ResponseEntity.ok(productos);
+}
 
     @PostMapping
     public ResponseEntity<Producto> createProducto(@RequestBody Producto producto) {
+        Long vendedorId = Long.valueOf(producto.getVendedor().getId());
+        Optional<Vendedor> vendedorOptional = vendedorRepository.findById(vendedorId);
+        if (!vendedorOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        Vendedor vendedor = vendedorOptional.get();
+        producto.setVendedor(vendedor);
         Producto nuevoProducto = productoRepository.save(producto);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoProducto);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Producto> editarProducto(@PathVariable Long id, @RequestBody Producto productoActualizado) {
