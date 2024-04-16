@@ -27,6 +27,12 @@ public class VendedorController {
     @Autowired
     private VendedorRepository vendedorRepository;
 
+    @GetMapping
+    public ResponseEntity<List<Vendedor>> getAllVendedores() {
+        List<Vendedor> vendedores = vendedorRepository.findAll();
+        return ResponseEntity.ok().body(vendedores);
+    }
+    
     @PostMapping("/registro")
     public Vendedor registrarVendedor(@RequestBody Vendedor vendedor) {
        return vendedorRepository.save(vendedor);

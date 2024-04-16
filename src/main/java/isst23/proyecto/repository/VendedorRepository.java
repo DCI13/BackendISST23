@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import isst23.proyecto.model.Vendedor;
 
-public interface VendedorRepository extends JpaRepository<Vendedor, Integer> {
+public interface VendedorRepository extends JpaRepository<Vendedor, Long> {
     Vendedor findByCorreo(String correo);
-    Optional<Vendedor> findById(Long vendedorId);
+    Optional<Vendedor> findById(Long id);
 
 }

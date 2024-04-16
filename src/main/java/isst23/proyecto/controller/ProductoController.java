@@ -30,15 +30,15 @@ public class ProductoController {
     //     return ResponseEntity.ok().body(productos);
     // }
     @GetMapping
-public ResponseEntity<List<Producto>> getProductsByVendedorId(@RequestParam(required = false) Long idVendedor) {
-    List<Producto> productos;
-    if (idVendedor != null) {
-        productos = productoRepository.findByVendedorId(idVendedor);
-    } else {
-        productos = productoRepository.findAll();
+    public ResponseEntity<List<Producto>> getProductsByVendedorId(@RequestParam(required = false) Long idVendedor) {
+        List<Producto> productos;
+        if (idVendedor != null) {
+            productos = productoRepository.findByVendedorId(idVendedor);
+        } else {
+            productos = productoRepository.findAll();
+        }
+        return ResponseEntity.ok(productos);
     }
-    return ResponseEntity.ok(productos);
-}
 
     @PostMapping
     public ResponseEntity<Producto> createProducto(@RequestBody Producto producto) {
