@@ -85,7 +85,7 @@ public class Comprador {
         return this.contraseña;
     }
 
-    public void setcontraseña(String constraseña) {
+    public void setcontraseña(String contraseña) {
         this.contraseña = contraseña;
     }
 

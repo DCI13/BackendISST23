@@ -3,6 +3,8 @@ package isst23.proyecto.model;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
+import java.sql.Blob;
+import java.sql.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -88,7 +90,7 @@ public class Vendedor {
         return this.contraseña;
     }
 
-    public void setcontraseña(String constraseña) {
+    public void setcontraseña(String contraseña) {
         this.contraseña = contraseña;
     }
 
@@ -116,7 +118,7 @@ public class Vendedor {
         this.horario = horario;
     }
 
-    public String getimagen() {
+    public String  getimagen() {
         return this.imagen;
     }
 
