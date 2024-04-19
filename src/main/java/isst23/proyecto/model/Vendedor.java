@@ -25,7 +25,7 @@ import jakarta.persistence.GenerationType;
 public class Vendedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String nombre;
     private String apellido;
     private String telefono;
@@ -55,11 +55,11 @@ private List<Producto> productos;
         this.imagen = imagen;
     }
 
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getnombre() {
