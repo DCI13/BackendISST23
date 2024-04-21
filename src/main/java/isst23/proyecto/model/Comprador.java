@@ -5,7 +5,9 @@ import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -25,14 +27,16 @@ public class Comprador {
     private String correo;
     private String contraseña;
     private String direccion;
-    private boolean vulnerable;
+    private String vulnerable;
 
-    @JsonIgnore
+    @OneToMany(mappedBy = "comprador")
+    @JsonManagedReference("comprador-pedido")
+    private List<Pedido> pedidos;
 
     public Comprador() {
     }
 
-    public Comprador(String nombre, String apellido, String telefono, String correo, String contraseña, String direccion, boolean vulnerable) {
+    public Comprador(String nombre, String apellido, String telefono, String correo, String contraseña, String direccion, String vulnerable) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
@@ -97,16 +101,20 @@ public class Comprador {
         this.direccion = direccion;
     }
 
-    public boolean isVulnerable() {
+    public String getVulnerable() {
         return this.vulnerable;
     }
 
-    public boolean getVulnerable() {
-        return this.vulnerable;
-    }
-
-    public void setVulnerable(boolean vulnerable) {
+    public void setVulnerable(String vulnerable) {
         this.vulnerable = vulnerable;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
 }
