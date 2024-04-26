@@ -23,9 +23,9 @@ public class Producto {
     private Integer stock;
     private String foto;
 
-@JsonBackReference
-@ManyToOne
-@JoinColumn(name = "vendedorid", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "vendedor_id")
+    @JsonBackReference("vendedor-producto")
 private Vendedor vendedor;
     //Constructor
     public Producto() {}
