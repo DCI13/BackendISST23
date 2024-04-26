@@ -2,15 +2,20 @@ package isst23.proyecto.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.ArrayList;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import isst23.proyecto.model.Comprador;
+import isst23.proyecto.model.Pedido;
+import isst23.proyecto.model.Vendedor;
 import isst23.proyecto.repository.CompradorRepository;
+import isst23.proyecto.repository.PedidoRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,15 +27,12 @@ public class CompradorController {
 
     @Autowired
     private CompradorRepository compradorRepository;
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
     @PostMapping("/registro")
     public Comprador registrarComprador(@RequestBody Comprador comprador) {
-        System.out.println("Valor de isVulnerable recibido desde el frontend: " + comprador.isVulnerable());
-        boolean vulnerable = comprador.isVulnerable() ? true : false;
-    
-        // Establecer el valor de vulnerable en el objeto comprador antes de guardarlo en la base de datos
-       comprador.setVulnerable(vulnerable);
-       return compradorRepository.save(comprador);
+        return compradorRepository.save(comprador);
     }
 
     @PostMapping("/login")
@@ -59,4 +61,32 @@ public class CompradorController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Comprador> obtenerCompradorPorId(@PathVariable Long id) {
+        // Buscar el vendedor por su ID en la base de datos
+        Optional<Comprador> optionalComprador = compradorRepository.findById(id);
+        if (optionalComprador.isPresent()) {
+            // Si se encuentra el vendedor, devolverlo en la respuesta
+            Comprador comprador = optionalComprador.get();
+            return ResponseEntity.ok(comprador);
+        } else {
+            // Si no se encuentra el vendedor, devolver un error 404
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/vulnerable/{vulnerable}")
+    public ResponseEntity<List<Pedido>> getPedidosByCompradorVulnerable(@PathVariable String vulnerable) {
+    List<Comprador> compradores = compradorRepository.findByVulnerable(vulnerable);
+    List<Pedido> pedidos = new ArrayList<>();
+    for (Comprador comprador : compradores) {
+        pedidos.addAll(pedidoRepository.findByCompradorId(comprador.getId()));
+    }
+    if (pedidos.isEmpty()) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND); // No se encontraron pedidos para estos compradores
+    } else {
+        return new ResponseEntity<>(pedidos, HttpStatus.OK);
+    }
+}
 }
