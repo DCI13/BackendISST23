@@ -36,9 +36,9 @@ public class Vendedor {
     private String horario;
     private String imagen;
 
-@JsonManagedReference
-@OneToMany(mappedBy = "vendedor")
-private List<Producto> productos;
+    @OneToMany(mappedBy = "vendedor")
+    @JsonManagedReference("vendedor-producto")
+    private List<Producto> productos;
 
     public Vendedor() {
     }
