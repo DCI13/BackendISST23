@@ -3,18 +3,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import java.util.Optional;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.http.MediaType;
-
 import isst23.proyecto.model.Comprador;
 import isst23.proyecto.model.Pedido;
-import isst23.proyecto.model.Vendedor;
 import isst23.proyecto.repository.PedidoRepository;
 import isst23.proyecto.repository.CompradorRepository;
-import isst23.proyecto.repository.VendedorRepository;
-import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -24,8 +17,6 @@ public class PedidoController {
     
     @Autowired
     private CompradorRepository compradorRepository;
-    @Autowired   
-    private VendedorRepository vendedorRepository;
     @Autowired
     private PedidoRepository pedidoRepository;
 

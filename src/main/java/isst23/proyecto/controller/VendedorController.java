@@ -3,13 +3,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-
-import isst23.proyecto.model.Producto;
 import isst23.proyecto.model.Vendedor;
 import isst23.proyecto.repository.VendedorRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;

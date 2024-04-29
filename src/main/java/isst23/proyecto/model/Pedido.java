@@ -1,13 +1,5 @@
 package isst23.proyecto.model;
-
-
-import java.sql.Blob;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,10 +15,6 @@ public class Pedido {
     private String descripcion;
     private String horaRecogida;
     private Long vendedorId;
-    // @ManyToOne
-    // @JsonBackReference("vendedor-pedido")
-    // @JoinColumn(name = "vendedor_id")
-    // private Vendedor vendedorPedido;
 
     @ManyToOne
     @JsonBackReference("comprador-pedido")

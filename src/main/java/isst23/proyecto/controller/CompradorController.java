@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import isst23.proyecto.model.Comprador;
 import isst23.proyecto.model.Pedido;
-import isst23.proyecto.model.Vendedor;
 import isst23.proyecto.repository.CompradorRepository;
 import isst23.proyecto.repository.PedidoRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
