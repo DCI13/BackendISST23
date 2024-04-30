@@ -19,12 +19,7 @@ public class ProductoController {
     private ProductoRepository productoRepository;
     @Autowired   
     private VendedorRepository vendedorRepository;
-
-    // @GetMapping
-    // public ResponseEntity<List<Producto>> getAllProductos() {
-    //     List<Producto> productos = productoRepository.findAll();
-    //     return ResponseEntity.ok().body(productos);
-    // }
+    
     @GetMapping
     public ResponseEntity<List<Producto>> getProductsByVendedorId(@RequestParam(required = false) Long idVendedor) {
         List<Producto> productos;
