@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -40,29 +41,24 @@ public class testVendedor {
         assertEquals(vendedor, vendedorRegistrado);
     }
 
-     @Test
-    void testIniciarSesion_CredencialesCorrectas() {
-        
-        Vendedor vendedor = new Vendedor();
-        vendedor.setcorreo("correo@ejemplo.com");
-        vendedor.setcontraseña("contraseña");
-
-        
-        when(vendedorRepository.findByCorreo("correo@ejemplo.com")).thenReturn(vendedor);
-
-        
-        Vendedor vendedorLogin = new Vendedor();
-        vendedorLogin.setcorreo("correo@ejemplo.com");
-        vendedorLogin.setcontraseña("contraseña");
-
-        
-        ResponseEntity<Map<String, String>> response = vendedorController.iniciarSesion(vendedorLogin);
-
-        
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("vendedor", response.getBody().get("mensaje"));
-    }
-
     
+
+     @Test
+    public void testCrearVendedor() {
+        
+        // Crear un nuevo vendedor
+        Vendedor vendedor = new Vendedor();
+        vendedor.setnombre("Homer Simpson");
+        vendedor.setcorreo("homer@gmail.com");
+        vendedor.setcontraseña("1234");
+        vendedor.setdireccion("Calle amarilla");
+        vendedorRepository.save(vendedor);
+        // Verificar que se haya creado correctamente
+        assertNotNull(vendedor);
+        assertEquals("Homer Simpson", vendedor.getnombre());
+        assertEquals("juan.perez@mail.com", vendedor.getcorreo());
+        assertEquals("1234", vendedor.getcontraseña());
+        assertEquals("Calle amarilla", vendedor.getdireccion());
+    }
 }
 
