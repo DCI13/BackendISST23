@@ -7,15 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 
 import isst23.proyecto.controller.VendedorController;
 import isst23.proyecto.model.Vendedor;
 import isst23.proyecto.repository.VendedorRepository;
 
 
-import java.util.Map;
+
 
 @SpringBootTest
 public class testVendedor {
