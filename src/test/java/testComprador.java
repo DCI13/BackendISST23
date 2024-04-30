@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -78,5 +79,32 @@ public class testComprador {
         assertEquals("Nombre", response.getBody().getnombre());
     }
 
+     @Test
+    final void testFindAllUsuarios() {
+    // Crear varios usuarios y guardarlos en el repositorio
+    Comprador usuario1 = new Comprador();
+    usuario1.setnombre("Homer");
+    usuario1.setcorreo("Homer@mail.com");
+    compradorRepository.save(usuario1);
+
+    Comprador usuario2 = new  Comprador();
+    usuario2.setnombre("Bart");
+    usuario2.setcorreo("Bart@mail.com");
+    compradorRepository.save(usuario2);
+
+    Comprador usuario3 = new  Comprador();
+    usuario3.setnombre("Lisa");
+    usuario3.setcorreo("Lisa@mail.com");
+    compradorRepository.save(usuario3);
+
     
+    List< Comprador> usuarios = compradorRepository.findAll();
+
+    assertEquals(3, usuarios.size());
+
+   
+    assertEquals(usuario1.getnombre(), usuarios.get(0).getnombre());
+    assertEquals(usuario2.getnombre(), usuarios.get(1).getnombre());
+    assertEquals(usuario3.getnombre(), usuarios.get(2).getnombre());
+}
 }
