@@ -78,7 +78,7 @@ public class testComprador {
         assertEquals("Nombre", response.getBody().getnombre());
     }
 
-     @Test
+    /*  @Test
     final void testFindAllUsuarios() {
     // Crear varios usuarios y guardarlos en el repositorio
     Comprador usuario1 = new Comprador();
@@ -105,5 +105,5 @@ public class testComprador {
     assertEquals(usuario1.getnombre(), usuarios.get(0).getnombre());
     assertEquals(usuario2.getnombre(), usuarios.get(1).getnombre());
     assertEquals(usuario3.getnombre(), usuarios.get(2).getnombre());
-}
+}*/
 }

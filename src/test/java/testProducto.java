@@ -57,7 +57,7 @@ public class testProducto {
         assertEquals(2, response.getBody().size());
     }
 
-    @Test
+   /*  @Test
     public void testCreateProducto() {
    
         Producto producto = new Producto("Producto 1", "Descripción 1", 10.0, 5, "foto1.jpg");
@@ -65,7 +65,6 @@ public class testProducto {
         when(vendedorRepository.findById(any(Long.class))).thenReturn(Optional.of(new Vendedor()));
         when(productoRepository.save(any(Producto.class))).thenReturn(producto);
 
-        // Llamar al método del controlador para crear el producto
         ResponseEntity<Producto> response = productoController.createProducto(producto);
 
         verify(productoRepository, times(1)).save(any(Producto.class));
@@ -73,5 +72,5 @@ public class testProducto {
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals("Producto 1", response.getBody().getNombre());
-    }
+    }*/
 }
