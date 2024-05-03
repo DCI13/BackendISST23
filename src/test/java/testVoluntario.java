@@ -3,10 +3,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import isst23.proyecto.ProyectoApplication;
 import isst23.proyecto.model.Voluntario;
 import isst23.proyecto.repository.VoluntarioRepository;
 
-@SpringBootTest
+@SpringBootTest(classes = ProyectoApplication.class)
 public class testVoluntario {
 
     @Autowired

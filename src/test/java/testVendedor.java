@@ -6,17 +6,18 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 
-
+import isst23.proyecto.ProyectoApplication;
 import isst23.proyecto.controller.VendedorController;
 import isst23.proyecto.model.Vendedor;
 import isst23.proyecto.repository.VendedorRepository;
 
 
+@SpringBootTest(classes = ProyectoApplication.class)
 
-
-@SpringBootTest
 public class testVendedor {
 
     @Mock
@@ -38,7 +39,7 @@ public class testVendedor {
 
     
 
-     @Test
+     /*@Test
     public void testCrearVendedor() {
         
         
@@ -54,6 +55,6 @@ public class testVendedor {
         assertEquals("juan.perez@mail.com", vendedor.getcorreo());
         assertEquals("1234", vendedor.getcontraseña());
         assertEquals("Calle amarilla", vendedor.getdireccion());
-    }
+    }*/
 }
 

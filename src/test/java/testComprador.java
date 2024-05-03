@@ -37,25 +37,25 @@ public class testComprador {
     public void testRegistrarComprador() {
         Comprador comprador = new Comprador();
         comprador.setnombre("Nombre");
-        comprador.setcorreo("correo@example.com");
+        comprador.setcorreo("correo@gmail.com");
         when(compradorRepository.save(any(Comprador.class))).thenReturn(comprador);
 
         Comprador result = compradorController.registrarComprador(comprador);
 
         assertNotNull(result);
         assertEquals("Nombre", result.getnombre());
-        assertEquals("correo@example.com", result.getcorreo());
+        assertEquals("correo@gmail.com", result.getcorreo());
     }
 
     @Test
     public void testIniciarSesionCredencialesCorrectas() {
         Comprador comprador = new Comprador();
-        comprador.setcorreo("correo@example.com");
+        comprador.setcorreo("correo@gmail.com");
         comprador.setcontraseña("contraseña");
-        when(compradorRepository.findByCorreo("correo@example.com")).thenReturn(comprador);
+        when(compradorRepository.findByCorreo("correo@gmail.com")).thenReturn(comprador);
 
         Comprador compradorLogin = new Comprador();
-        compradorLogin.setcorreo("correo@example.com");
+        compradorLogin.setcorreo("correo@gmail.com");
         compradorLogin.setcontraseña("contraseña");
         ResponseEntity<Map<String, String>> response = compradorController.iniciarSesion(compradorLogin);
 
